@@ -1,15 +1,22 @@
 const express= require('express');
-const http = require('http')
-const app = express();
+const http = require('http');
+const mongoose  = require('mongoose');
+const app = express()
 
-module.exports= class Application{
-        constructor(){
-            this.ServerConfig()
-        }
-        ServerConfig(){
-            const server = http.createServer(app);
-            server.listen(3000,()=>{
-                console.log('server run on port 3000')
-            })
-        }
+module.exports = class Application {
+    constructor(){
+        this.ServerConfig();
+        this.DatabaseConfig();
+    }
+    ServerConfig(){
+        const server = http.createServer(app);
+        server.listen(config.port,()=>{
+            console.log('Server run on port 3000')
+        })
+        
+    }
+    DatabaseConfig(){
+        mongoose.Promise = global.Promise;
+        mongoose.connect(config.database.url, config.database.options)
+    }
 }
